@@ -1,5 +1,5 @@
 # Mesto (проектная работа №4 by [Yandex.Practicum](https://practicum.yandex.ru/ "Практикум"))
-### Ссылка на работу в Github pages [клац]https://methodm4n.github.io/mesto/ "Ссылка на работу").
+### Ссылка на работу в Github pages [клац](https://methodm4n.github.io/mesto/ "Ссылка на работу").
 ----
 В данной проектной работе использованы такие **технологии** как:
 ```HTML
