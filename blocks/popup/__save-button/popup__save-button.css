@@ -1,0 +1,24 @@
+.popup__save-button {
+   background: url('../../../images/SubmitButton.svg');
+   margin: 0 0 0 36px;
+   padding: 0;
+   max-width: 358px;
+   min-height: 50px;
+   cursor: pointer;
+   border: none;
+   outline: none;
+}
+
+@media (max-width: 885px) {
+   .popup__save-button {
+      background: url('../../../images/SubmitButtonS.svg');
+      max-width: 238px;
+      min-height: 46px;
+      margin: 0 0 0 25px;
+   }
+}
+
+.popup__save-button:hover {
+   opacity: 0.5;
+   cursor: pointer;
+}
