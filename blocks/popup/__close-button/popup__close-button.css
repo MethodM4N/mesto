@@ -4,9 +4,8 @@
    width: 32px;
    height: 32px;
    position: absolute;
-   top: 0;
-   right: 0;
-   margin: -40px -40px 0 0;
+   top: -40px;
+   right: -40px;
    cursor: pointer;
    border: none;
    outline: none;
@@ -14,14 +13,15 @@
 
 @media (max-width: 885px) {
    .popup__close-button {
-      background-image: url('../../../images/CloseIconS.svg');
+      background-size: contain;
+      top: -36px;
+      right: 0;
       width: 20px;
       height: 20px;
-      margin: -36px 0 0 0;
    }
 }
 
 .popup__close-button:hover {
-   opacity: 0.5;
+   opacity: 0.6;
    cursor: pointer;
 }
