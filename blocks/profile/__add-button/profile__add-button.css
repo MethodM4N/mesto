@@ -5,6 +5,7 @@
    height: 50px;
    background: url('../../../images/Add-Button.svg');
    border: 2px solid #FFFFFF;
+   border-radius: 2px;
    background-repeat: no-repeat;
    background-position: center;
    background-size: 22px 22px;
@@ -13,7 +14,6 @@
 @media screen and (max-width: 885px) {
    .profile__add-button {
       width: 282px;
-      background-size: 150px 50px;
       background-size: 16px 16px;
    }
 }

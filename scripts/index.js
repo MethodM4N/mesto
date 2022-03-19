@@ -8,7 +8,6 @@ let profileDescription = document.querySelector('.profile__description');
 let popupContainer = popup.querySelector('.popup__container');
 let nameInput = popupContainer.querySelector('#popupName');
 let descriptionInput = popupContainer.querySelector('#popupDescription');
-let submitButton = popupContainer.querySelector('.popup__save-button');
 let formElement = document.querySelector('.popup__form');
 
 function openPopup() {
@@ -29,5 +28,4 @@ function formSubmitHandler(evt) {
 
 editButton.addEventListener('click', openPopup);
 closeEdit.addEventListener('click', closePopup);
-submitButton.addEventListener('click', formSubmitHandler);
 formElement.addEventListener('submit', formSubmitHandler);
