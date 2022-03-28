@@ -11,7 +11,17 @@ const formElement = document.querySelector('.popup__form');
 const formElementE = document.querySelector('.popup__form_e');
 const ESC_KEY = "Escape";
 // add delete and edit places
-
+const popupElements = document.querySelector('.popup_type_add-elements');
+const popupImage = document.querySelector('.popup_type_image');
+const addButton = document.querySelector('.profile__add-button');
+const closeButtonElement = document.querySelector('.popup__close-button_element');
+const closeButtonImage = document.querySelector('.popup__close-button_image');
+const elementDescription = document.querySelector('#elementDescription');
+const elementLink = document.querySelector('#elementLink');
+const elementTemplate = document.querySelector('#elementTemplate').content;
+const elements = document.querySelector('.elements');
+const popupCaption = document.querySelector('.popup__image-caption');
+const popupPhoto = document.querySelector('.popup__image');
 
 
 // save and edit description
@@ -63,19 +73,6 @@ const initialCards = [
    }
 ];
 
-const popupElements = document.querySelector('.popup_type_add-elements');
-const popupImage = document.querySelector('.popup_type_image');
-const addButton = document.querySelector('.profile__add-button');
-const closeButtonElement = document.querySelector('.popup__close-button_element');
-const closeButtonImage = document.querySelector('.popup__close-button_image');
-const elementDescription = document.querySelector('#elementDescription');
-const elementLink = document.querySelector('#elementLink');
-const elementTemplate = document.querySelector('#elementTemplate').content;
-const elements = document.querySelector('.elements');
-const likeButton = document.querySelector('.element__like');
-const popupCaption = document.querySelector('.popup__image-caption');
-const popupPhoto = document.querySelector('.popup__image');
-
 initialCards.forEach(function (element) {
    const elementImage = elementTemplate.cloneNode(true);
    elementImage.querySelector('.element__title').textContent = element.name;
@@ -86,13 +83,6 @@ initialCards.forEach(function (element) {
    elementImage.querySelector(".element__photo").addEventListener("click", popupOpenImage);
    elements.append(elementImage);
 });
-
-function removeElement(evt) {
-   evt.target.closest(".element").remove();
-}
-function like(evt) {
-   evt.target.classList.toggle('element__like_active');
-};
 
 function elementSubmitHandler(evt) {
    evt.preventDefault();
@@ -107,10 +97,24 @@ function elementSubmitHandler(evt) {
    closePopup();
 }
 
+function removeElement(evt) {
+   evt.target.closest(".element").remove();
+}
+function like(evt) {
+   evt.target.classList.toggle('element__like_active');
+};
+
 function openPopupElements() {
    elementDescription.value = "";
    elementLink.value = "";
    popupElements.classList.add('popup_open');
+   document.addEventListener('keyup', onDocumentKeyUp);
+}
+
+function popupOpenImage(evt) {
+   popupImage.classList.add('popup_open');
+   popupPhoto.src = evt.target.src;
+   popupCaption.textContent = evt.target.alt;
    document.addEventListener('keyup', onDocumentKeyUp);
 }
 
@@ -119,13 +123,6 @@ function closePopup() {
    popupElements.classList.remove('popup_open');
    popupImage.classList.remove('popup_open');
    document.removeEventListener('keyup', onDocumentKeyUp);
-}
-
-function popupOpenImage(evt) {
-   popupImage.classList.add('popup_open');
-   popupPhoto.src = evt.target.src;
-   popupCaption.textContent = evt.target.alt;
-   document.addEventListener('keyup', onDocumentKeyUp);
 }
 
 addButton.addEventListener('click', openPopupElements);
