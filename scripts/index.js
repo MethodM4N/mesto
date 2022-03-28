@@ -64,21 +64,27 @@ const initialCards = [
 ];
 
 const popupElements = document.querySelector('.popup_type_add-elements');
+const popupImage = document.querySelector('.popup_type_image');
 const addButton = document.querySelector('.profile__add-button');
-const closeEditElement = document.querySelector('.popup__close-button_element');
+const closeButtonElement = document.querySelector('.popup__close-button_element');
+const closeButtonImage = document.querySelector('.popup__close-button_image');
 const elementDescription = document.querySelector('#elementDescription');
 const elementLink = document.querySelector('#elementLink');
 const elementTemplate = document.querySelector('#elementTemplate').content;
 const elements = document.querySelector('.elements');
 const likeButton = document.querySelector('.element__like');
+const popupCaption = document.querySelector('.popup__image-caption');
+const popupPhoto = document.querySelector('.popup__image');
 
 initialCards.forEach(function (element) {
    const elementImage = elementTemplate.cloneNode(true);
    elementImage.querySelector('.element__title').textContent = element.name;
    elementImage.querySelector('.element__photo').src = element.link;
+   elementImage.querySelector('.element__photo').alt = element.name;
+   elementImage.querySelector('.element__like').addEventListener('click', like);
+   elementImage.querySelector(".element__delete-button").addEventListener("click", removeElement);
+   elementImage.querySelector(".element__photo").addEventListener("click", popupOpenImage);
    elements.append(elementImage);
-   elements.querySelector('.element__like').addEventListener('click', like);
-   elements.querySelector(".element__delete-button").addEventListener("click", removeElement);
 });
 
 function removeElement(evt) {
@@ -93,9 +99,11 @@ function elementSubmitHandler(evt) {
    const elementImage = elementTemplate.cloneNode(true);
    elementImage.querySelector('.element__title').textContent = elementDescription.value;
    elementImage.querySelector('.element__photo').src = elementLink.value;
+   elementImage.querySelector('.element__photo').alt = elementDescription.value;
+   elementImage.querySelector('.element__like').addEventListener('click', like);
+   elementImage.querySelector(".element__delete-button").addEventListener("click", removeElement);
+   elementImage.querySelector(".element__photo").addEventListener("click", popupOpenImage);
    elements.prepend(elementImage);
-   elements.querySelector('.element__like').addEventListener('click', like);
-   elements.querySelector(".element__delete-button").addEventListener("click", removeElement);
    closePopup();
 }
 
@@ -109,12 +117,21 @@ function openPopupElements() {
 function closePopup() {
    popupDescription.classList.remove('popup_open');
    popupElements.classList.remove('popup_open');
+   popupImage.classList.remove('popup_open');
    document.removeEventListener('keyup', onDocumentKeyUp);
+}
+
+function popupOpenImage(evt) {
+   popupImage.classList.add('popup_open');
+   popupPhoto.src = evt.target.src;
+   popupCaption.textContent = evt.target.alt;
+   document.addEventListener('keyup', onDocumentKeyUp);
 }
 
 addButton.addEventListener('click', openPopupElements);
 editButton.addEventListener('click', openPopup);
 closeEdit.addEventListener('click', closePopup);
-closeEditElement.addEventListener('click', closePopup);
+closeButtonElement.addEventListener('click', closePopup);
+closeButtonImage.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
 formElementE.addEventListener('submit', elementSubmitHandler);
