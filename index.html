@@ -31,60 +31,60 @@
       <button class="profile__add-button" type="button"></button>
     </section>
     <section class="elements"></section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+  </footer>
 
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
-    </footer>
+  <!-- Pop-up edit name and description -->
+  <div class="popup popup_type_description">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" aria-label="закрыть"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="editForm">
+        <input type="text" name="profileName" id="popupName" class="popup__input" placeholder="Моё имя">
+        <input type="text" name="profileDescription" id="popupDescription" class="popup__input"
+          placeholder="Немного о себе">
+        <button class="popup__save-button" type="submit" aria-label="сохранить">Сохранить</button>
+      </form>
+    </div>
+  </div>
 
-    <!-- Pop-up edit name and description -->
-    <div class="popup popup_type_description">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button" aria-label="закрыть"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="editForm">
-          <input type="text" name="profileName" id="popupName" class="popup__input" placeholder="Моё имя">
-          <input type="text" name="profileDescription" id="popupDescription" class="popup__input"
-            placeholder="Немного о себе">
-          <button class="popup__save-button" type="submit" aria-label="сохранить">Сохранить</button>
-        </form>
+  <!-- Pop-up add new places -->
+  <div class="popup popup_type_add-elements">
+    <div class="popup__container">
+      <button class="popup__close-button popup__close-button_element" type="button" aria-label="закрыть"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form popup__form_e" name="editForm">
+        <input type="text" name="elementDescription" id="elementDescription" class="popup__input"
+          placeholder="Название">
+        <input type="text" name="elementLink" id="elementLink" class="popup__input" placeholder="Ссылка на картинку">
+        <button class="popup__save-button" type="submit" aria-label="сохранить">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Pop-up open image -->
+  <div class="popup popup_type_image">
+    <div class="popup__image-container">
+      <button class="popup__close-button popup__close-button_image" type="button" aria-label="закрыть"></button>
+      <img class="popup__image" src=" " alt=" ">
+      <p class="popup__image-caption"></p>
+    </div>
+  </div>
+
+  <template class="element-template" id="elementTemplate">
+    <div class="element">
+      <img src=" " class="element__photo" alt=" ">
+      <button class="element__delete-button"></button>
+      <div class="element__description">
+        <h2 class="element__title"></h2>
+        <button class="element__like" type="button" aria-label="поставить лайк"></button>
       </div>
     </div>
+  </template>
 
-    <!-- Pop-up add new places -->
-    <div class="popup popup_type_add-elements">
-      <div class="popup__container">
-        <button class="popup__close-button popup__close-button_element" type="button" aria-label="закрыть"></button>
-        <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form popup__form_e" name="editForm">
-          <input type="text" name="elementDescription" id="elementDescription" class="popup__input"
-            placeholder="Название">
-          <input type="text" name="elementLink" id="elementLink" class="popup__input" placeholder="Ссылка на картинку">
-          <button class="popup__save-button" type="submit" aria-label="сохранить">Сохранить</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Pop-up open image -->
-    <div class="popup popup_type_image">
-      <div class="popup__image-container">
-        <button class="popup__close-button popup__close-button_image" type="button" aria-label="закрыть"></button>
-        <img class="popup__image" src=" " alt=" ">
-        <p class="popup__image-caption"></p>
-      </div>
-    </div>
-
-    <template class="element-template" id="elementTemplate">
-      <div class="element">
-        <img src=" " class="element__photo" alt=" ">
-        <button class="element__delete-button"></button>
-        <div class="element__description">
-          <h2 class="element__title"></h2>
-          <button class="element__like" type="button" aria-label="поставить лайк"></button>
-        </div>
-      </div>
-    </template>
-
-    <script src="./scripts/index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
