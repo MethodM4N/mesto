@@ -126,7 +126,7 @@ function elementSubmitHandler(evt) {
 }
 
 function addNewCard(elementImage) {
-   elements.prepend(addCardListeners(elementImage));;
+   elements.prepend(addCardListeners(elementImage));
 }
 
 function removeElement(evt) {
