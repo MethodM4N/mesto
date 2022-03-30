@@ -5,4 +5,5 @@
    width: 100%;
    min-width: 282px;
    height: 282px;
+   cursor: pointer;
 }
