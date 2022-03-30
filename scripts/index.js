@@ -8,10 +8,10 @@ const popupContainer = popupDescription.querySelector('.popup__container');
 const nameInput = popupContainer.querySelector('#popupName');
 const descriptionInput = popupContainer.querySelector('#popupDescription');
 const popupFormDescription = document.querySelector('.popup__form');
-const popupFormElements = document.querySelector('.popup__form_elements');
+const popupFormElement = document.querySelector('.popup__form_element');
 const ESC_KEY = "Escape";
 // add delete and edit places
-const popupElements = document.querySelector('.popup_type_add-elements');
+const popupElement = document.querySelector('.popup_type_add-element');
 const popupImage = document.querySelector('.popup_type_image');
 const addButton = document.querySelector('.profile__add-button');
 const buttonCloseElement = document.querySelector('.popup__close-button_element');
@@ -37,7 +37,7 @@ function closePopup(popup) {
 function openPopupElements() {
    elementDescription.value = "";
    elementLink.value = "";
-   openPopup(popupElements);
+   openPopup(popupElement);
 }
 
 function popupOpenImage(evt) {
@@ -122,7 +122,7 @@ function elementSubmitHandler(evt) {
    elementImage.querySelector('.element__photo').src = elementLink.value;
    elementImage.querySelector('.element__photo').alt = elementDescription.value;
    addNewCard(elementImage);
-   closePopup(popupElements);
+   closePopup(popupElement);
 }
 
 function addNewCard(elementImage) {
@@ -139,7 +139,7 @@ function like(evt) {
 addButton.addEventListener('click', openPopupElements);
 editButton.addEventListener('click', openPopupDescription);
 buttonCloseEdit.addEventListener('click', () => closePopup(popupDescription));
-buttonCloseElement.addEventListener('click', () => closePopup(popupElements));
+buttonCloseElement.addEventListener('click', () => closePopup(popupElement));
 buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
 popupFormDescription.addEventListener('submit', formSubmitHandler);
-popupFormElements.addEventListener('submit', elementSubmitHandler);
+popupFormElement.addEventListener('submit', elementSubmitHandler);
