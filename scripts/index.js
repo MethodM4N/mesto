@@ -17,8 +17,8 @@ const addButton = document.querySelector('.profile__add-button');
 const buttonCloseElement = document.querySelector('.popup__close-button_element');
 const buttonCloseImage = document.querySelector('.popup__close-button_image');
 const elementDescription = document.querySelector('#elementDescription');
-const elementLink = document.querySelector('#elementLink');
 const elementTemplate = document.querySelector('#elementTemplate').content;
+const elementLink = document.querySelector('#elementLink');
 const elements = document.querySelector('.elements');
 const popupCaption = document.querySelector('.popup__image-caption');
 const popupPhoto = document.querySelector('.popup__image');
@@ -96,37 +96,30 @@ const initialCards = [
    }
 ];
 
-function addCardListeners(elementImage) {
+function createCard(element) {
+   const elementImage = elementTemplate.cloneNode(true);
+   elementImage.querySelector('.element__title').textContent = element.name;
+   const image = elementImage.querySelector('.element__photo');
+   image.src = element.link;
+   image.alt = element.name;
    elementImage.querySelector('.element__like').addEventListener('click', like);
    elementImage.querySelector(".element__delete-button").addEventListener("click", removeElement);
    elementImage.querySelector(".element__photo").addEventListener("click", popupOpenImage);
-   return elementImage
+   return elementImage;
 }
 
 initialCards.forEach(function (element) {
-   const elementImage = elementTemplate.cloneNode(true);
-   elementImage.querySelector('.element__title').textContent = element.name;
-   elementImage.querySelector('.element__photo').src = element.link;
-   elementImage.querySelector('.element__photo').alt = element.name;
-   addArrayCards(elementImage);
+   elements.append(createCard(element));
 });
-
-function addArrayCards(elementImage) {
-   elements.append(addCardListeners(elementImage));
-}
 
 function elementSubmitHandler(evt) {
    evt.preventDefault();
-   const elementImage = elementTemplate.cloneNode(true);
-   elementImage.querySelector('.element__title').textContent = elementDescription.value;
-   elementImage.querySelector('.element__photo').src = elementLink.value;
-   elementImage.querySelector('.element__photo').alt = elementDescription.value;
-   addNewCard(elementImage);
+   const element = {
+      name: elementDescription.value,
+      link: elementLink.value,
+   };
+   elements.prepend(createCard(element));
    closePopup(popupElement);
-}
-
-function addNewCard(elementImage) {
-   elements.prepend(addCardListeners(elementImage));
 }
 
 function removeElement(evt) {
