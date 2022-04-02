@@ -102,9 +102,9 @@ function createCard(element) {
    const image = elementImage.querySelector('.element__photo');
    image.src = element.link;
    image.alt = element.name;
+   image.addEventListener("click", popupOpenImage);
    elementImage.querySelector('.element__like').addEventListener('click', like);
    elementImage.querySelector(".element__delete-button").addEventListener("click", removeElement);
-   elementImage.querySelector(".element__photo").addEventListener("click", popupOpenImage);
    return elementImage;
 }
 
