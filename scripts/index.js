@@ -11,11 +11,13 @@ const popupFormDescription = document.querySelector('.popup__form');
 const popupFormElement = document.querySelector('.popup__form_element');
 const ESC_KEY = "Escape";
 // add delete and edit places
-const popupElement = document.querySelector('.popup_type_add-element');
+const popupAddCard = document.querySelector('.popup_type_add-element');
 const popupImage = document.querySelector('.popup_type_image');
 const addButton = document.querySelector('.profile__add-button');
 const buttonCloseElement = document.querySelector('.popup__close-button_element');
 const buttonCloseImage = document.querySelector('.popup__close-button_image');
+const buttonSaveDescription = document.querySelector('.popup__save-button-description');
+const buttonSaveElement = document.querySelector('.popup__save-button-element');
 const elementDescription = document.querySelector('#elementDescription');
 const elementTemplate = document.querySelector('#elementTemplate').content;
 const elementLink = document.querySelector('#elementLink');
@@ -32,15 +34,18 @@ function openPopup(popup) {
 function closePopup(popup) {
    popup.classList.remove('popup_open');
    document.removeEventListener('keyup', onDocumentKeyUp);
+   resetValidation();
 }
 
 function openPopupElements() {
    elementDescription.value = "";
    elementLink.value = "";
-   openPopup(popupElement);
+   buttonSaveElement.classList.add('popup__save-button_disabled');
+   buttonSaveElement.disabled = true;
+   openPopup(popupAddCard);
 }
 
-function popupOpenImage(evt) {
+function openPopupImage(evt) {
    popupPhoto.src = evt.target.src;
    popupPhoto.alt = evt.target.alt;
    popupCaption.textContent = evt.target.alt;
@@ -59,12 +64,12 @@ popupList.forEach((popup) => {
    popup.addEventListener('mousedown', (event) => {
       if (event.target === popup) {
          const activePopup = document.querySelector('.popup_open');
-         closePopup(activePopup)
+         closePopup(activePopup);
       };
    });
 });
 
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
    evt.preventDefault();
    profileName.textContent = nameInput.value;
    profileDescription.textContent = descriptionInput.value;
@@ -74,6 +79,8 @@ function formSubmitHandler(evt) {
 function openPopupDescription() {
    nameInput.value = profileName.textContent;
    descriptionInput.value = profileDescription.textContent;
+   buttonSaveDescription.classList.remove('popup__save-button_disabled');
+   buttonSaveDescription.disabled = false;
    openPopup(popupDescription);
 }
 // add delete and edit places
@@ -84,7 +91,7 @@ function createCard(element) {
    const image = elementImage.querySelector('.element__photo');
    image.src = element.link;
    image.alt = element.name;
-   image.addEventListener("click", popupOpenImage);
+   image.addEventListener("click", openPopupImage);
    elementImage.querySelector('.element__like').addEventListener('click', like);
    elementImage.querySelector(".element__delete-button").addEventListener("click", removeElement);
    return elementImage;
@@ -94,14 +101,14 @@ initialCards.forEach(function (element) {
    elements.append(createCard(element));
 });
 
-function elementSubmitHandler(evt) {
+function handleAddCardFormSubmit(evt) {
    evt.preventDefault();
    const element = {
       name: elementDescription.value,
       link: elementLink.value,
    };
    elements.prepend(createCard(element));
-   closePopup(popupElement);
+   closePopup(popupAddCard);
 }
 
 function removeElement(evt) {
@@ -117,10 +124,9 @@ editButton.addEventListener('click', openPopupDescription);
 buttonCloseEdit.addEventListener('click', () => closePopup(popupDescription));
 buttonCloseElement.addEventListener('click', () => closePopup(popupElement));
 buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
-popupFormDescription.addEventListener('submit', formSubmitHandler);
-popupFormElement.addEventListener('submit', elementSubmitHandler);
-popupFormDescription.addEventListener('input', handleInput);
-popupFormElement.addEventListener('input', handleInput);
+popupFormDescription.addEventListener('submit', handleProfileFormSubmit);
+popupFormElement.addEventListener('submit', handleAddCardFormSubmit);
+
 
 
 

@@ -10,10 +10,6 @@
    line-height: 17px;
 }
 
-.popup__input:invalid {
-   border-bottom: solid 1px #ff0000;
-}
-
 @media (max-width: 885px) {
    .popup__input {
       padding-bottom: 8px;
