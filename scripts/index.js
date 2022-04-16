@@ -37,11 +37,11 @@ function closePopup(popup) {
 }
 
 function openPopupAddCard() {
+   resetValidation();
    elementDescription.value = "";
    elementLink.value = "";
    buttonSaveElement.classList.add('popup__save-button_disabled');
    buttonSaveElement.disabled = true;
-   resetValidation();
    openPopup(popupAddCard);
 }
 
@@ -49,7 +49,6 @@ function openPopupImage(evt) {
    popupPhoto.src = evt.target.src;
    popupPhoto.alt = evt.target.alt;
    popupCaption.textContent = evt.target.alt;
-   resetValidation();
    openPopup(popupImage);
 }
 
@@ -78,6 +77,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 function openPopupDescription() {
+   resetValidation();
    nameInput.value = profileName.textContent;
    descriptionInput.value = profileDescription.textContent;
    buttonSaveDescription.classList.remove('popup__save-button_disabled');
