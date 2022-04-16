@@ -34,10 +34,9 @@ function openPopup(popup) {
 function closePopup(popup) {
    popup.classList.remove('popup_open');
    document.removeEventListener('keyup', onDocumentKeyUp);
-   resetValidation();
 }
 
-function openPopupElements() {
+function openPopupAddCard() {
    elementDescription.value = "";
    elementLink.value = "";
    buttonSaveElement.classList.add('popup__save-button_disabled');
@@ -119,7 +118,7 @@ function like(evt) {
 };
 
 
-addButton.addEventListener('click', openPopupElements);
+addButton.addEventListener('click', openPopupAddCard);
 editButton.addEventListener('click', openPopupDescription);
 buttonCloseEdit.addEventListener('click', () => closePopup(popupDescription));
 buttonCloseElement.addEventListener('click', () => closePopup(popupElement));
