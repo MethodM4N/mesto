@@ -80,4 +80,4 @@ const resetValidation = () => {
    });
 };
 
-enableValidation({ validationConfig }); 
+enableValidation(validationConfig); 
