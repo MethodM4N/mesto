@@ -37,7 +37,7 @@ function closePopup(popup) {
 }
 
 function openPopupAddCard() {
-   resetValidation();
+   resetValidation(validationConfig);
    elementDescription.value = "";
    elementLink.value = "";
    buttonSaveElement.classList.add('popup__save-button_disabled');
@@ -77,7 +77,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 function openPopupDescription() {
-   resetValidation();
+   resetValidation(validationConfig);
    nameInput.value = profileName.textContent;
    descriptionInput.value = profileDescription.textContent;
    buttonSaveDescription.classList.remove('popup__save-button_disabled');
