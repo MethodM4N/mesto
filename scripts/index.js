@@ -123,7 +123,7 @@ function like(evt) {
 addButton.addEventListener('click', openPopupAddCard);
 editButton.addEventListener('click', openPopupDescription);
 buttonCloseEdit.addEventListener('click', () => closePopup(popupDescription));
-buttonCloseElement.addEventListener('click', () => closePopup(popupElement));
+buttonCloseElement.addEventListener('click', () => closePopup(popupAddCard));
 buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
 popupFormDescription.addEventListener('submit', handleProfileFormSubmit);
 popupFormElement.addEventListener('submit', handleAddCardFormSubmit);
