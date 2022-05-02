@@ -1,4 +1,7 @@
-// save and edit description
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import { initialCards, validationConfig } from './initial.js';
+
 const popupDescription = document.querySelector('.popup_type_description');
 const editButton = document.querySelector('.profile__button-edit');
 const buttonCloseEdit = document.querySelector('.popup__close-button');
@@ -7,10 +10,9 @@ const profileDescription = document.querySelector('.profile__description');
 const popupContainer = popupDescription.querySelector('.popup__container');
 const nameInput = popupContainer.querySelector('#popupName');
 const descriptionInput = popupContainer.querySelector('#popupDescription');
-const popupFormDescription = document.querySelector('.popup__form');
+const popupFormDescription = document.querySelector('.popup__form_description');
 const popupFormElement = document.querySelector('.popup__form_element');
 const ESC_KEY = "Escape";
-// add delete and edit places
 const popupAddCard = document.querySelector('.popup_type_add-element');
 const popupImage = document.querySelector('.popup_type_image');
 const addButton = document.querySelector('.profile__add-button');
@@ -19,12 +21,22 @@ const buttonCloseImage = document.querySelector('.popup__close-button_image');
 const buttonSaveDescription = document.querySelector('.popup__save-button-description');
 const buttonSaveElement = document.querySelector('.popup__save-button-element');
 const elementDescription = document.querySelector('#elementDescription');
-const elementTemplate = document.querySelector('#elementTemplate').content;
 const elementLink = document.querySelector('#elementLink');
-const elements = document.querySelector('.elements');
 const popupCaption = document.querySelector('.popup__image-caption');
 const popupPhoto = document.querySelector('.popup__image');
 const popupList = Array.from(document.querySelectorAll('.popup'));
+
+initialCards.forEach((item) => {
+   const card = new Card(item, '#elementTemplate');
+   const cardElement = card.generateCard();
+   document.querySelector('.elements').append(cardElement);
+});
+
+const validateFormDescription = new FormValidator(validationConfig, popupFormDescription);
+validateFormDescription.enableValidation();
+
+const validateFormElement = new FormValidator(validationConfig, popupFormElement);
+validateFormElement.enableValidation();
 
 function openPopup(popup) {
    popup.classList.add('popup_open');
@@ -37,7 +49,7 @@ function closePopup(popup) {
 }
 
 function openPopupAddCard() {
-   resetValidation(validationConfig);
+   validateFormElement.resetValidation();
    elementDescription.value = "";
    elementLink.value = "";
    buttonSaveElement.classList.add('popup__save-button_disabled');
@@ -45,7 +57,7 @@ function openPopupAddCard() {
    openPopup(popupAddCard);
 }
 
-function openPopupImage(evt) {
+export function openPopupImage(evt) {
    popupPhoto.src = evt.target.src;
    popupPhoto.alt = evt.target.alt;
    popupCaption.textContent = evt.target.alt;
@@ -77,48 +89,25 @@ function handleProfileFormSubmit(evt) {
 }
 
 function openPopupDescription() {
-   resetValidation(validationConfig);
+   validateFormDescription.resetValidation();
    nameInput.value = profileName.textContent;
    descriptionInput.value = profileDescription.textContent;
    buttonSaveDescription.classList.remove('popup__save-button_disabled');
    buttonSaveDescription.disabled = false;
    openPopup(popupDescription);
 }
-// add delete and edit places
-
-function createCard(element) {
-   const elementImage = elementTemplate.cloneNode(true);
-   elementImage.querySelector('.element__title').textContent = element.name;
-   const image = elementImage.querySelector('.element__photo');
-   image.src = element.link;
-   image.alt = element.name;
-   image.addEventListener("click", openPopupImage);
-   elementImage.querySelector('.element__like').addEventListener('click', like);
-   elementImage.querySelector(".element__delete-button").addEventListener("click", removeElement);
-   return elementImage;
-}
-
-initialCards.forEach(function (element) {
-   elements.append(createCard(element));
-});
 
 function handleAddCardFormSubmit(evt) {
    evt.preventDefault();
-   const element = {
+   const item = {
       name: elementDescription.value,
       link: elementLink.value,
    };
-   elements.prepend(createCard(element));
+   const card = new Card(item, '#elementTemplate');
+   const cardElement = card.generateCard();
+   document.querySelector('.elements').prepend(cardElement);
    closePopup(popupAddCard);
 }
-
-function removeElement(evt) {
-   evt.target.closest(".element").remove();
-}
-function like(evt) {
-   evt.target.classList.toggle('element__like_active');
-};
-
 
 addButton.addEventListener('click', openPopupAddCard);
 editButton.addEventListener('click', openPopupDescription);
