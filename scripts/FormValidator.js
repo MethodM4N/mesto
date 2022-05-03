@@ -27,17 +27,17 @@ export default class FormValidator {
 
    _checkFormValidity = () => {
       if (this._inputList.some(input => !input.validity.valid)) {
-         this._disableSubmit();
+         this.disableSubmit();
       } else {
-         this._enableSubmit();
+         this.enableSubmit();
       }
    };
 
-   _disableSubmit = () => {
+   disableSubmit = () => {
       this._button.classList.add(this._inactiveButtonClass);
       this._button.disabled = true;
    };
-   _enableSubmit = () => {
+   enableSubmit = () => {
       this._button.classList.remove(this._inactiveButtonClass);
       this._button.disabled = false;
    };
