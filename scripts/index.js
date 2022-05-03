@@ -104,9 +104,7 @@ function handleAddCardFormSubmit(evt) {
       name: elementDescription.value,
       link: elementLink.value,
    };
-   const card = new Card(item, '#elementTemplate');
-   const cardElement = card.generateCard();
-   elements.prepend(cardElement);
+   elements.prepend(createNewCard(item));
    closePopup(popupAddCard);
    validateFormElement.disableSubmit();
 }

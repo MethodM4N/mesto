@@ -28,7 +28,7 @@ export default class Card {
    };
 
    _removeElement() {
-      this.buttonDeleteCard.closest('.element').remove();
+      this._element.remove();
    };
    _handleToggleLike() {
       this._like.classList.toggle('element__like_active');
