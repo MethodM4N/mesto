@@ -70,7 +70,6 @@ const popupAdd = new PopupWithForm(
    }
 );
 
-
 /* Listeners */
 
 popupEdit.setEventListeners();
