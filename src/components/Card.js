@@ -35,11 +35,11 @@ export default class Card {
 
    _setEventListeners() {
       this._like.addEventListener('click', () => {
-         this._handleToggleLike(this);
+         this._handleToggleLike();
       });
 
       this.buttonDeleteCard.addEventListener('click', () => {
-         this._removeElement(this);
+         this._removeElement();
       });
 
       this._cardImage.addEventListener('click', () => {

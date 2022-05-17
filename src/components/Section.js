@@ -2,7 +2,7 @@ export default class Section {
    constructor({ items, renderer }, formSelector) {
       this._items = items;
       this.renderer = renderer;
-      this._formSelector = formSelector;
+      this._formSelector = document.querySelector(formSelector);
    }
 
    render() {

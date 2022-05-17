@@ -14,12 +14,13 @@ import {
    userInfoSelector,
    nameInput,
    descriptionInput,
-   popupFormDescription,
    popupFormElement,
-   popupAddCard,
-   popupImage,
+   popupFormDescription,
    addButton,
-   elements
+   popupImage,
+   elements,
+   popupDescription,
+   popupAddCard
 } from "../utils/constants.js";
 
 const userInfo = new UserInfo({ userNameSelector, userInfoSelector });
@@ -30,8 +31,9 @@ validateFormDescription.enableValidation();
 const validateFormElement = new FormValidator(validationConfig, popupFormElement);
 validateFormElement.enableValidation();
 
+const popupImg = new PopupWithImage(popupImage);
+
 function handleCardClick(name, link) {
-   const popupImg = new PopupWithImage(popupImage);
    popupImg.open(name, link);
 }
 
@@ -53,7 +55,7 @@ const classSection = new Section(
 classSection.render();
 
 const popupEdit = new PopupWithForm(
-   popupFormDescription,
+   popupDescription,
    function submitForm(cardData) {
       userInfo.setUserInfo(cardData.profileName, cardData.profileDescription);
       popupEdit.close();
@@ -71,6 +73,8 @@ const popupAdd = new PopupWithForm(
 );
 
 /* Listeners */
+
+popupImg.setEventListeners();
 
 popupEdit.setEventListeners();
 editButton.addEventListener('click', () => {
