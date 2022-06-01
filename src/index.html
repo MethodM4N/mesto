@@ -18,13 +18,14 @@
   <main>
     <section class="profile">
       <div class="profile__info">
-        <img src="<%=require('./images/avatar.jpg')%>" alt="Аватарка" class="profile__avatar">
+        <img src="" alt="Аватар" class="profile__avatar">
+        <div class="profile__overlay-button"></div>
         <div class="profile__info-blocks">
           <div class="profile__info-block">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button class="profile__button-edit" type="button" aria-label="редактировать профиль"></button>
           </div>
-          <p class="profile__description">Исследователь океана</p>
+          <p class="profile__description"></p>
         </div>
       </div>
       <button class="profile__add-button" type="button"></button>
@@ -53,6 +54,20 @@
     </div>
   </div>
 
+  <!-- Pop-up edit avatar -->
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container popup__container_type-edit-avatar">
+      <button class="popup__close-button" type="button" aria-label="закрыть"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form popup__form_avatar" name="editForm" novalidate>
+        <input type="url" name="link" id="elementLink" class="popup__input" placeholder="Ссылка на картинку" required>
+        <span class="popup__input-error elementLink-error"></span>
+        <button class="popup__save-button popup__save-button-description" type="submit"
+          aria-label="сохранить">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Pop-up add new places -->
   <div class="popup popup_type_add-element">
     <div class="popup__container">
@@ -66,6 +81,18 @@
         <span class="popup__input-error elementLink-error"></span>
         <button class="popup__save-button popup__save-button-element" type="submit"
           aria-label="сохранить">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Pop-up confirm a delete -->
+  <div class="popup popup_type_delete-element">
+    <div class="popup__container popup__container_type-delete">
+      <button class="popup__close-button popup__close-button_element" type="button" aria-label="закрыть"></button>
+      <h2 class="popup__title popup__title_type-delete">Вы уверены?</h2>
+      <form class="popup__form popup__form_element" name="editForm" novalidate>
+        <button class="popup__save-button popup__save-button-element-delete" type="submit"
+          aria-label="сохранить">Да</button>
       </form>
     </div>
   </div>
@@ -85,7 +112,10 @@
       <button class="element__delete-button"></button>
       <div class="element__description">
         <h2 class="element__title"></h2>
-        <button class="element__like" type="button" aria-label="поставить лайк"></button>
+        <div class="element__like-container">
+          <button class="element__like" type="button" aria-label="поставить лайк"></button>
+          <p class="element__like-value"></p>
+        </div>
       </div>
     </div>
   </template>
