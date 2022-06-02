@@ -10,7 +10,7 @@ export default class Api {
             authorization: this._token
          }
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
    getInitialCards() {
@@ -19,7 +19,7 @@ export default class Api {
             authorization: this._token
          }
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
    updateUserInfo(name, about) {
@@ -34,7 +34,7 @@ export default class Api {
             about: about
          })
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
    addNewCard(name, link) {
@@ -49,7 +49,7 @@ export default class Api {
             link: link
          })
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
    deleteCard(cardId) {
@@ -60,7 +60,7 @@ export default class Api {
             'Content-Type': 'application/json'
          }
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
    addLikeUpdate(cardId) {
@@ -71,7 +71,7 @@ export default class Api {
             'Content-Type': 'application/json'
          }
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
    deleteLikeUpdate(cardId) {
@@ -82,7 +82,7 @@ export default class Api {
             'Content-Type': 'application/json'
          }
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
    updateAvatar(avatar) {
@@ -96,10 +96,10 @@ export default class Api {
             avatar: avatar
          })
       })
-         .then(this._checkStatus);
+         .then(this._getStatus);
    }
 
-   _checkStatus(res) {
+   _getStatus(res) {
       if (res.ok) {
          return res.json();
       }
