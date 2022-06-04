@@ -12,13 +12,13 @@ export default class PopupWithSubmit extends Popup {
       this.card = card;
    };
 
-   _Submit = (evt) => {
+   _submit = (evt) => {
       evt.preventDefault();
       this._submitForm(this.card);
    };
 
    setEventListeners() {
       super.setEventListeners();
-      this._formElement.addEventListener('submit', this._Submit);
+      this._formElement.addEventListener('submit', this._submit);
    };
 };

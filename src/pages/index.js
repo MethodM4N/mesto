@@ -46,7 +46,7 @@ validateFormAvatar.enableValidation();
 const popupImg = new PopupWithImage(popupImage);
 
 const popupDelete = new PopupWithSubmit(
-   function SubmitForm(card) {
+   function submitForm(card) {
       api.deleteCard(card.Id)
          .then(() => {
             {
@@ -59,14 +59,20 @@ const popupDelete = new PopupWithSubmit(
    popupDeleteCard);
 
 
-function createNewCard(item, userId) {
+function createNewCard(item, userId, typeOfCard) {
    const card = new Card(item, '#elementTemplate', handleCardClick, handleCardLike, handleCardDelete, userId);
-   const cardElement = card.generateCard();
-   return cardElement;
+   if (typeOfCard === 'serverCards') {
+      const cardElement = card.generateServerCards();
+      return cardElement;
+   }
+   if (typeOfCard === 'newCard') {
+      const cardElement = card.createCard();
+      return cardElement;
+   }
 }
 
 function handleCardLike(card) {
-   const likeToggle = card.Liked() ? api.deleteLikeUpdate(card.Id) : api.addLikeUpdate(card.Id);
+   const likeToggle = card.liked() ? api.deleteLikeUpdate(card.Id) : api.addLikeUpdate(card.Id);
    likeToggle.then((res) => {
       card.likes = res.likes;
       card.handleToggleLike();
@@ -90,7 +96,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       const classSection = new Section(
          {
             renderer: (item) => {
-               const card = createNewCard(item, userData._id);
+               const card = createNewCard(item, userData._id, 'serverCards');
                classSection.addItem(card, 'serverCards');
             }
          },
@@ -99,15 +105,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
       const popupEdit = new PopupWithForm(
          popupDescription,
-         function SubmitForm(data) {
+         function submitForm(data) {
             popupEdit.updateTextOnButton('Сохранение...');
             api.updateUserInfo(data.profileName, data.profileDescription)
                .then(() => {
-                  popupEdit.updateTextOnButton('Сохранить');
                   userInfo.setUserInfo(data.profileName, data.profileDescription);
                   popupEdit.close();
                })
-               .catch((err) => console.log(err));
+               .catch((err) => console.log(err))
+               .finally(() => {
+                  popupEdit.updateTextOnButton('Сохранить');
+               });
          }
       );
       editButton.addEventListener('click', () => {
@@ -121,15 +129,18 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       popupEdit.setEventListeners();
 
       const popupUpdateAvatar = new PopupWithForm(popupEditAvatar,
-         function SubmitForm(inputsList) {
+         function submitForm(inputsList) {
+            console.log(inputsList.link);
             popupUpdateAvatar.updateTextOnButton('Сохранение...');
             api.updateAvatar(inputsList.link)
-               .then((inputsList) => {
-                  popupUpdateAvatar.updateTextOnButton('Сохранить');
+               .then(() => {
                   userInfo.setUserAvatar(inputsList.link);
                   popupUpdateAvatar.close();
                })
-               .catch((err) => console.log(err));
+               .catch((err) => console.log(err))
+               .finally(() => {
+                  popupUpdateAvatar.updateTextOnButton('Сохранить');
+               });
          });
       popupUpdateAvatar.setEventListeners();
       editAvatarButton.addEventListener('click', () => {
@@ -139,16 +150,19 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
       const popupAdd = new PopupWithForm(
          popupAddCard,
-         function SubmitForm(CardData) {
+         function submitForm(CardData) {
             popupAdd.updateTextOnButton('Создание...');
             api.addNewCard(CardData.name, CardData.link)
                .then((data) => {
-                  popupAdd.updateTextOnButton('Создать');
                   const userId = userData._id;
-                  const newCard = createNewCard(data, userId);
+                  const newCard = createNewCard(data, userId, 'newCard');
                   classSection.addItem(newCard, 'newCard');
                   popupAdd.close();
                })
+               .catch((err) => console.log(err))
+               .finally(() => {
+                  popupAdd.updateTextOnButton('Создать');
+               });
          }
       );
       popupAdd.setEventListeners();

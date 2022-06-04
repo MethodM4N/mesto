@@ -30,8 +30,6 @@ export default class Card {
       this._cardImage.alt = this._name;
       this.buttonDeleteCard = this._element.querySelector('.element__delete-button');
       this._setEventListeners();
-      this.updateLikes(this.likes.length);
-      this._checkOwner();
       this.handleToggleLike();
       return this._element;
    };
@@ -40,14 +38,14 @@ export default class Card {
       this._element.remove();
    };
 
-   Liked() {
+   liked() {
       return this.likes.some((item) => {
          return item._id === this._userId;
       })
    }
 
    handleToggleLike() {
-      this.Liked() ? this._like.classList.add('element__like_active') :
+      this.liked() ? this._like.classList.add('element__like_active') :
          this._like.classList.remove('element__like_active');
    };
 
@@ -74,4 +72,17 @@ export default class Card {
          this._handleCardClick(this._name, this._link);
       });
    };
+
+   generateServerCards() {
+      this.generateCard();
+      this._checkOwner();
+      this.updateLikes(this.likes.length);
+      return this._element;
+   }
+
+   createCard() {
+      this.generateCard();
+      return this._element;
+   }
+
 }
