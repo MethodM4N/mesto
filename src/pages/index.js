@@ -177,3 +177,5 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 popupImg.setEventListeners();
 popupDelete.setEventListeners();
+
+
