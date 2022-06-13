@@ -40,7 +40,6 @@ export default class Card {
 
    liked() {
       return this.likes.some((item) => {
-         debugger
          return item._id === this._userId;
       })
    }

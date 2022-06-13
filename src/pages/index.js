@@ -73,7 +73,6 @@ function createNewCard(item, userId, typeOfCard) {
 
 function handleCardLike(card) {
    const likeToggle = card.liked() ? api.deleteLikeUpdate(card.Id) : api.addLikeUpdate(card.Id);
-   console.log(card);
    likeToggle.then((res) => {
       card.likes = res.likes;
       card.handleToggleLike();
