@@ -107,6 +107,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
          popupDescription,
          function submitForm(data) {
             popupEdit.updateTextOnButton('Сохранение...');
+            validateFormDescription.disableSubmit();
             api.updateUserInfo(data.profileName, data.profileDescription)
                .then(() => {
                   userInfo.setUserInfo(data.profileName, data.profileDescription);
@@ -130,8 +131,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
       const popupUpdateAvatar = new PopupWithForm(popupEditAvatar,
          function submitForm(inputsList) {
-            console.log(inputsList.link);
             popupUpdateAvatar.updateTextOnButton('Сохранение...');
+            validateFormAvatar.disableSubmit();
             api.updateAvatar(inputsList.link)
                .then(() => {
                   userInfo.setUserAvatar(inputsList.link);
@@ -152,6 +153,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
          popupAddCard,
          function submitForm(CardData) {
             popupAdd.updateTextOnButton('Создание...');
+            validateFormElement.disableSubmit();
             api.addNewCard(CardData.name, CardData.link)
                .then((data) => {
                   const userId = userData._id;
